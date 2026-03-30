@@ -1,7 +1,8 @@
 services:
 
   web:
-    container_name: transac_flask_test
+    container_name: flask_test
+    image: flask_web
     build: ./src
     entrypoint: ["pytest"] # override entrypoint
     command: ["test/", "-v"] #run pytest
