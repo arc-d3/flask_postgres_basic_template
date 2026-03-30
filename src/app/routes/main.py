@@ -9,9 +9,9 @@ main_bp = Blueprint("main", __name__)
 @main_bp.route("/")
 @main_bp.route("/home")
 def home():
-    return "This is Home"
+    return render_template("home.html")
 
 @main_bp.route("/dashboard", methods=["GET"])
 @login_required
 def dashboard():
-    return "This is dashboard"
+    return render_template("dashboard.html")

@@ -1,0 +1,9 @@
+services:
+
+  web:
+    container_name: transac_flask_test
+    build: ./src
+    entrypoint: ["pytest"] # override entrypoint
+    command: ["test/", "-v"] #run pytest
+    env_file:
+      - .env.example

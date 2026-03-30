@@ -11,14 +11,20 @@ db = SQLAlchemy()
 migrate = Migrate()
 login_manager = LoginManager()
 
-def create_app():
+def create_app(testing_config=None):
+
     app = Flask(__name__, template_folder="./templates")
-    app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
-    app.config["SQLALCHEMY_DATABASE_URI"] = (
-        f"postgresql://{os.environ['POSTGRES_USER']}"
-        f":{os.environ['POSTGRES_PASSWORD']}"
-        f"@db:5432/{os.environ['POSTGRES_DB']}"
-    )
+    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "test_secret_key")
+
+    # for test mode
+    if testing_config:
+        app.config.update(testing_config)
+    else:
+        app.config["SQLALCHEMY_DATABASE_URI"] = (
+            f"postgresql://{os.environ.get("POSTGRES_USER", "test_user")}"
+            f":{os.environ.get("POSTGRES_PASSWORD", "test_password")}"
+            f"@db:5432/{os.environ.get("POSTGRES_DB", "test_db")}"
+        )
 
     db.init_app(app)
     migrate.init_app(app, db)

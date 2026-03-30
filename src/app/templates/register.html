@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p style="color: red;">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        {{ form.name.label }}
+        {{ form.name() }}
+
+        {% for error in form.name.errors %}
+            <span style="color: red;"> {{ error }}</span>
+        {% endfor %}
+        <br><br>
+
+        {{ form.email.label }}
+        {{ form.email() }}
+
+        {% for error in form.email.errors %}
+            <span style="color: red;"> {{ error }}</span>
+        {% endfor %}
+        <br><br>
+
+        {{ form.password.label }}
+        {{ form.password() }}
+
+        {% for error in form.password.errors %}
+            <span style="color: red;"> {{ error }}</span>
+        {% endfor %}
+        <br><br>
+
+        {{ form.register() }}
+    </form>
+</body>
+</html>
