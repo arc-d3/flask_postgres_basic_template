@@ -1,4 +1,3 @@
-from app.models.user import User
 import re
 
 def get_csrf_token(client, url):
