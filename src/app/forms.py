@@ -12,3 +12,7 @@ class RegisterForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email(), Length(min=6)])
     password = PasswordField("Password", validators=[DataRequired(), Length(min=6)])
     register = SubmitField("Register")
+
+class ApiKeyRegisterForm(FlaskForm):
+    name = StringField("Name", validators=[DataRequired(), Length(min=5, max=25)])
+    submit = SubmitField("Generate API Key")
